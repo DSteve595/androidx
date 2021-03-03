@@ -288,12 +288,19 @@ fun ModalBottomSheetLayout(
                 resistance = null
             )
 
-            Box(Modifier.fillMaxSize().then(swipeable)) {
+            Box(Modifier.fillMaxSize()) {
                 content()
                 Scrim(
                     color = scrimColor,
                     onDismiss = { scope.launch { sheetState.hide() } },
                     visible = sheetState.targetValue != ModalBottomSheetValue.Hidden
+                )
+                Box(
+                    Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .height(with(LocalDensity.current) { sheetHeight.toDp() })
+                        .then(swipeable)
                 )
             }
         }
